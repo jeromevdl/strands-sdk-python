@@ -102,7 +102,7 @@ class ValkeySessionManager(RepositorySessionManager, SessionRepository):
         """Write JSON object to Valkey."""
         try:
             json_data = json.dumps(data, ensure_ascii=False)
-            self.client.execute_command("JSON.SET", key, ".", json_data)
+            self.client.execute_command("JSON.SET", key, "$", json_data)
         except Exception as e:
             raise SessionException(f"Failed to write Valkey object {key}: {e}") from e
 
